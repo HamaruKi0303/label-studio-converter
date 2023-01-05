@@ -11,9 +11,13 @@ services:
     # 環境変数の設定
     environment:
       - JUPYTER_ENABLE_LAB=yes
+      - CHOWN_HOME=yes
+      - CHOWN_HOME_OPTS=-R
+      - GRANT_SUDO=yes
     # ボリューム(データの永続化の場所)の設定(ホスト:コンテナ)
     # ホスト内のworkディレクトリとコンテナ内の/home/jovyan/workディレクトリが紐づいているイメージ
     volumes:
-      - .:/home/jovyan/work
+      - .:/home/jovyan/lstudio
+    working_dir: /home/jovyan/lstudio
     # 最後にjupyterLabに接続するためのコマンドを実行する。
     command: start-notebook.sh --NotebookApp.token=''
